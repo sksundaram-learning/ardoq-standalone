@@ -1,0 +1,61 @@
+data:
+  image: alpine:3.3
+  volumes:
+    - /data/db
+    - /data/attachments
+  command: /bin/sh ls -la /data/db /data/attachments
+elasticsearch:
+  image: ardoq/elasticsearch:3.3-8u74-1.4.4
+  ports:
+    - "9200:9200"
+logstash:
+  image: ardoq/logstash:3.3-8u74-1.5.3
+  ports:
+    - "5043:5043"
+  links:
+    - elasticsearch
+forwarderapi:
+  image: ardoq/logstash-forwarder-api:3.3-0.4.0
+  links:
+    - logstash
+  volumes_from:
+    - api
+forwarderfront:
+  image: ardoq/logstash-forwarder-front:3.3-0.4.0
+  links:
+    - logstash
+  volumes_from:
+    - web
+forwardermongodb:
+  image: ardoq/logstash-forwarder-mongodb:3.3-0.4.0
+  links:
+    - logstash
+  volumes_from:
+    - mongodb
+redis:
+  image: ardoq/ardoq-redis:2.8.21
+mongodb:
+  image: ardoq/mongodb:3.0.7
+  volumes_from:
+    - data
+  volumes:
+    - /var/log/mongodb
+  ports:
+    - "27017:27017"
+api:
+  image: ardoq/ardoq-api:latest
+  volumes_from:
+    - data
+  links:
+    - redis
+    - mongodb
+  ports:
+    - "3000:3000"
+web:
+  image: ardoq/ardoq-front:latest
+  links:
+    - api
+  ports:
+    - "80:80"
+    - "1026:1026"
+    - "1025:1025"
