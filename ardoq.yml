@@ -53,6 +53,7 @@ api:
     - "3000:3000"
   volumes:
     - ./lib/:/opt/lib
+  #command: java -jar  -DMONGO_CONFIG_SERVERS=tcp://mongodb:27017 -DREDIS_SPEC_HOST=tcp://redis:6379 -Dmail.smtp.auth.ntlm.domain=<Domain_name> --env local
   command: java -cp /opt/lib/*:ardoq-api.jar -DMONGO_CONFIG_SERVERS=tcp://mongodb:27017 -DREDIS_SPEC_HOST=tcp://redis:6379 ardoq.app --env local
 web:
   image: ardoq/ardoq-front:latest
