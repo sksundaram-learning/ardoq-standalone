@@ -84,6 +84,7 @@ Commands:
   pull              Pulls service images from Docker Hub
   load <file.tar>   Loads zipped images from specified archive folder into local Docker registry 
   init              Initializes Ardoq databases. ONLY first time install!
+  verify-users      Verifies email addresses of all users in database. 
   update            Applies latest version help content and demo content. Requires "pull" or "load" to actually have updated content to apply.
   rm                Stops and deletes all Ardoq containers. Data is backed up to folder "ardoq-data-backup", and is also persisted within docker for the updated version to use.
   backup <dir>      Backs up Ardoq into specified folder
@@ -120,6 +121,9 @@ else
         init)
             confirm "This will install Ardoq default databases. Are you sure you wish to continue? [y/N]" && init-mongo
             ;;
+        verify-users)
+            docker run --rm --link ardoqdocker_mongodb_1:mongodb ardoq/mongodb:3.0.7 mongo --host mongodb ardoq-users --eval 'db.user.update({},{$set: {"verified":true}},{multi: true})'
+            ;;            
         update)
             update-help-db
             ;;
