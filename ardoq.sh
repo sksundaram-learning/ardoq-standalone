@@ -96,6 +96,12 @@ else
         start)
             docker-compose -f ardoq.yml -p ardoqdocker up -d
             ;;
+        dev)
+            docker-compose -f ardoq.yml -p ardoqdocker up -d redis mongodb
+            ;;
+        api)
+            docker-compose -f ardoq.yml -p ardoqdocker up -d api redis mongodb
+            ;;
         stop)
             docker-compose -f ardoq.yml -p ardoqdocker stop
             ;;

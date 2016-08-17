@@ -51,6 +51,9 @@ api:
     - mongodb
   ports:
     - "3000:3000"
+  volumes:
+    - ./custom-authentication/target:/opt/lib
+  command: java -cp /opt/lib/*:ardoq-api.jar -DMONGO_CONFIG_SERVERS=tcp://mongodb:27017 -DREDIS_SPEC_HOST=tcp://redis:6379 ardoq.app --env local
 web:
   image: ardoq/ardoq-front:latest
   links:
