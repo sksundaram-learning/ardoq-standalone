@@ -142,3 +142,11 @@ NB\! This will stop the application, so users will not be able to work while the
 ./ardoq.sh update
 
 ```
+
+
+#### Custom Authentication / Active Directory Integration
+
+Custom integration must be tailored for each installation. This is done by implementing a small Java program that is installed on the API server. The program will be executed on every login, and can forward authentication requests to any local authentication system. We provide a scaffolding project for LDAP authentication 
+
+[details on how this works here](custom-authentication/README.md)
+
