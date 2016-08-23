@@ -51,11 +51,22 @@ api:
     - mongodb
   ports:
     - "3000:3000"
-  volumes:
-    - ./custom-authentication/target:/opt/lib
-  command: java -cp /opt/lib/*:ardoq-api.jar -DMONGO_CONFIG_SERVERS=tcp://mongodb:27017 -DREDIS_SPEC_HOST=tcp://redis:6379 ardoq.app --env local
+# Configuration of lib folder to patch or modify Ardoq installation
+#  volumes:
+#    - ./custom-authentication/target:/var/www/ardoqapi/lib
+
+# TODO: this can be removed in future releases of the API
+#  command: java -cp /var/www/ardoqapi/lib/*:ardoq-api.jar -DMONGO_CONFIG_SERVERS=tcp://mongodb:27017 -DREDIS_SPEC_HOST=tcp://redis:6379 ardoq.app --env local
+
 web:
   image: ardoq/ardoq-front:latest
+# Configure Nginx HTTPS:
+# 1) Uncomment volumes section below
+# 2) Put certificates in ./nginx/cert folder
+# 3) Configure nginx.conf with certificates in /etc/nginx/cert folder (seen from within Docker container)
+#  volumes:
+#    - ./nginx/nginx.conf:/etc/nginx/conf/nginx.conf
+#    - ./nginx/cert:/etc/nginx/cert
   links:
     - api
   ports:
