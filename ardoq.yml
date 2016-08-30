@@ -51,12 +51,8 @@ api:
     - mongodb
   ports:
     - "3000:3000"
-# Configuration of lib folder to patch or modify Ardoq installation
-#  volumes:
-#    - ./custom-authentication/target:/var/www/ardoqapi/lib
-
-# TODO: this can be removed in future releases of the API
-#  command: java -cp /var/www/ardoqapi/lib/*:ardoq-api.jar -DMONGO_CONFIG_SERVERS=tcp://mongodb:27017 -DREDIS_SPEC_HOST=tcp://redis:6379 ardoq.app --env local
+  volumes:
+    - ./lib:/var/www/ardoqapi/lib
 
 web:
   image: ardoq/ardoq-front:latest
