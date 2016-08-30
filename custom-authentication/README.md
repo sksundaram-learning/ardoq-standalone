@@ -1,16 +1,16 @@
 # Arodq Custom Authentication
 
-This project is a bases for letting you code your specific authentication for Ardoq.
+This project is a basis for letting you code your specific authentication for and On Premise installation of Ardoq.
 
-The class *must* be named:
+
+The class performing the custom authentication must have an empty constructor, and must be named:
 ```
 ardoq.auth.CustomAuthentication
 ```
 
-And the metod signature *must* be excactly:
+The class must also implement the provided interface
 ```
-public static boolean authenticate(String username, String password)
+ardoq.auth.ICustomAuthentication
 ```
 
-
-The jar-file is then placed in a folder on the server running the Ardoq API, and configured onto the API classpath.
+The compiled jar-file is then placed in the ***[Ardoq-installation-dir]/lib*** folder on the server running the Ardoq API, and configured onto the API classpath.
