@@ -3,6 +3,7 @@ import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
+import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 
@@ -19,16 +20,12 @@ import javax.naming.directory.InitialDirContext;
  */
 public class CustomAuthentication implements ICustomAuthentication {
 
-    public static void main(String[] args) {
-        new CustomAuthentication().authenticate("Kristian Helgesen", "ldap123");
+    public String status() {
+        return "ok";
     }
 
     public ArdoqUser authenticate(String username, String password) {
         return authenticate("ldap://localhost:389", username, password);
-    }
-
-    public String status() {
-        return "ok";
     }
 
     public ArdoqUser authenticate(String providerURL, String username, String password) {
@@ -47,11 +44,14 @@ public class CustomAuthentication implements ICustomAuthentication {
             // Create initial context
             DirContext ctx = new InitialDirContext(env);
             System.out.println("ok from LDAP server: "+ctx.getAttributes("cn="+username+",dc=example,dc=org"));
-            ctx.close();
+
+            Attributes attr = ctx.getAttributes("cn="+username+",dc=example,dc=org");
 
             ArdoqUser user = new ArdoqUser();
-            user.setEmail("kristian+custom4@ardoq.com");
-            user.setFullname("Kristian Helgesen");
+            user.setEmail(attr.get("email").get().toString());
+            user.setFullname(attr.get("cn").get().toString());
+            ctx.close();
+
             return user;
         } catch (NamingException e) {
             e.printStackTrace();
