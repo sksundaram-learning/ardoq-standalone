@@ -8,7 +8,7 @@ package ardoq.auth;
 public interface ICustomAuthentication {
     public String status();
 
-    public ArdoqUser authenticate(String providerURL, String username, String password);
+    public ArdoqUser authenticate(String username, String password);
 
     public static class ArdoqUser {
         private String email;
