@@ -6,9 +6,12 @@ package ardoq.auth;
  * @author Kristian Helgesen, Ardoq AS
  */
 public interface ICustomAuthentication {
-    public String status();
+
+    public STATUS status();
 
     public ArdoqUser authenticate(String username, String password);
+
+    public static enum STATUS { ok, error }
 
     public static class ArdoqUser {
         private String email;
