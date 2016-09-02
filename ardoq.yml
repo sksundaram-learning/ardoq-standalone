@@ -53,6 +53,11 @@ api:
     - "3000:3000"
   volumes:
     - ./lib:/var/www/ardoqapi/lib
+  environment:
+    - LDAP_PROVIDER_URL=ldap://localhost:389
+    - LDAP_SECURITY_PRINCIPAL=cn={0},dc=example,dc=org
+    - LDAP_EMAIL_ATTR=email
+    - LDAP_NAME_ATTR=fullname
 
 web:
   image: ardoq/ardoq-front:latest
