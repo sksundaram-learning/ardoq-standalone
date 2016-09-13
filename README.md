@@ -1,3 +1,5 @@
+#Ardoq standalone
+
 The entire Ardoq stack is packaged using Docker. 
 
 Ardoq will run on a single server that is set up to run Docker Compose. 
@@ -9,11 +11,9 @@ The docker images we use are either official releases, or based on the Alpine Li
 - A server, physical or virtual, that supports Docker Machine - [options here](https://docs.docker.com/installation/ target= target= target= target= target= target="_blank")  
 - At least 8 GB RAM
 - At least 100 GB Disk space
-- {color:/rgb(255, 255, 255)}[Docker Compose](https://docs.docker.com/compose/install/ target="_blank")  
-     {color}
+- [Docker Compose](https://docs.docker.com/compose/install/ target="_blank")  
 - Access to the Ardoq Docker images on [Docker Hub](http://hub.docker.com target= target= target= target= target= target="_blank")  
   , or zipped on file (contact Ardoq)
-
 
   
 
@@ -142,3 +142,14 @@ NB\! This will stop the application, so users will not be able to work while the
 ./ardoq.sh update
 
 ```
+
+
+#### Custom Authentication / Active Directory Integration
+
+Custom integration must be tailored for each installation. This is done by implementing a small Java program that is installed on the API server. The program will be executed on every login, and can forward authentication requests to any local authentication system. We provide a scaffolding project for LDAP authentication 
+
+[details on how this works here](custom-authentication/README.md)
+
+
+## Print me
+[PDF export of this document](https://gitprint.com/ardoq/ardoq-standalone/master/README.md)

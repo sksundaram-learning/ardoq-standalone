@@ -28,7 +28,7 @@ function backup {
     echo "Backing up into $1"
     docker run --rm -i -t -v $1:/dbbackup --link ardoqdocker_mongodb_1:mongodb mongo /bin/bash -c \
       'export DATE=$(date +%Y-%m-%d_%Hh%Mm) ; mongodump -h mongodb -o /dbbackup/$DATE ; cd /dbbackup ; tar czf mongodb-$DATE.tar.gz $DATE ; rm -r $DATE'
-    docker run --rm -i -t -v $1:/attachments --volumes-from ardoqdocker_data_1 alpine:3.2 /bin/sh -c \
+    docker run --rm -i -t -v $1:/attachments --volumes-from ardoqdocker_data_1 alpine:3.3 /bin/sh -c \
       'export DATE=$(date +%Y-%m-%d_%Hh%Mm) ; cd /data/attachments ; tar czf /attachments/attachments-$DATE.tar.gz workspace'
     SNAPSHOT=$(date +%Y-%m-%d_%Hh%Mm)
     docker commit ardoqdocker_elasticsearch_1 es_backup-$SNAPSHOT
@@ -40,7 +40,7 @@ function restore {
   docker run --rm -i -t -v "$1":/dbbackup/mongodb.tar.gz --link ardoqdocker_mongodb_1:mongodb mongo /bin/bash -c \
       'cd /dbbackup; mkdir unzipped; tar xzf mongodb.tar.gz --directory unzipped --strip 1; mongorestore -h mongodb --drop unzipped ; rm -r unzipped'
 
-  docker run --rm -it -v "$2":/backup/attachments.tar.gz  --volumes-from ardoqdocker_data_1 alpine:3.2 /bin/sh -c \
+  docker run --rm -it -v "$2":/backup/attachments.tar.gz  --volumes-from ardoqdocker_data_1 alpine:3.3 /bin/sh -c \
       'cd /data/attachments ; tar xzf /backup/attachments.tar.gz'
 }
 
@@ -96,6 +96,12 @@ else
     case "$1" in
         start)
             docker-compose -f ardoq.yml -p ardoqdocker up -d
+            ;;
+        dev)
+            docker-compose -f ardoq.yml -p ardoqdocker up -d redis mongodb
+            ;;
+        api)
+            docker-compose -f ardoq.yml -p ardoqdocker up -d api redis mongodb
             ;;
         stop)
             docker-compose -f ardoq.yml -p ardoqdocker stop
