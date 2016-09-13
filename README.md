@@ -34,21 +34,18 @@ Log your command line client in to Dockerhub with:
 
 ```
 docker login
-
 ```
 
 Verify that you have access to our private images, for example with:              
 
 ```
 docker pull ardoq/ardoq-front:latest
-
 ```
 
 Download the all the latest Docker images              
 
 ```
 ./ardoq.sh pull
-
 ```
 
 #### B) Offline Images from Zipped Archives
@@ -59,7 +56,6 @@ Load into your local docker registry with:
 
 ```
 ./ardoq.sh load [path/to/offline/distribution/ardoq-offline.tar]
-
 ```
   
 
@@ -69,14 +65,12 @@ To start the Ardoq stack, execute:
 
 ```
 ./ardoq.sh start
-
 ```
 
 Show the logs with:              
 
 ```
 ./ardoq.sh logs
-
 ```
 
 #### Bootstrapping the Ardoq database - install time only!
@@ -84,8 +78,7 @@ Show the logs with:
 When installing a fresh Ardoq instance, you need to bootstrap the database\. This is done with the command                
 
 ```
-./ardoq.sh init 
-
+./ardoq.sh init
 ```
 
 NB! Don't init when you have an exisiting database! 
@@ -101,7 +94,6 @@ Please schedule your backups to be stored automatically at regular intervals:
 
 ```
 ./ardoq.sh backup /your/local/folder/to/store/the/backup
-
 ```
 
 The backup script spawns a new Mongo\-DB client in a Docker container, with a link to the running Mongo\-DB container, and exports the data to the specified folder, then exits\. Attachments and logs are also backed up\.              
@@ -112,7 +104,6 @@ Be aware that the restore procedure will overwrite the existing database, if pre
 
 ```
 ./ardoq.sh restore [path/to/database/backup.tar] [path/to/attachment/backup.tar]
-
 ```
 
 #### Upgrade
@@ -125,7 +116,6 @@ Upgrade should be performed at regular intervals to keep up with the latest impr
 
 ```
 ./ardoq.sh stop
-
 ```
 
 NB\! This will stop the application, so users will not be able to work while the update is performed\!   
@@ -133,16 +123,20 @@ NB\! This will stop the application, so users will not be able to work while the
 
 ```
 ./ardoq.sh start
-
 ```
 
 4\) Import updated help content              
 
 ```
 ./ardoq.sh update
-
 ```
 
+#### Viewing logs with Kibana
+The default installation aggregates all logs into an Elastic Search image. To view the logs, you must start Kibana.
+```
+./kibana.sh start
+```
+This starts Kibana on port 8080. The first time you open Kibana, you also must set up the **Time-field name** to use ** @timestamp ** . 
 
 #### Custom Authentication / Active Directory Integration
 
