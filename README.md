@@ -83,7 +83,7 @@ When installing a fresh Ardoq instance, you need to bootstrap the database\. Thi
 
 NB! Don't init when you have an exisiting database! 
 
-The initial database includes an user **admin** with password **ardoq123**. Please change this!  
+The initial database includes an user **admin@ardoq.com** with password **ardoq123**. Please change this!  
   
 
 ## Maintaining the Ardoq Docker Stack
