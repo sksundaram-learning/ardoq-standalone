@@ -9,13 +9,14 @@ The docker images we use are either official releases, or based on the Alpine Li
 ## Prerequisites
 
 - A Linux server, physical or virtual, that supports Docker Machine - [options here](https://docs.docker.com/installation/)  
-- At least 8 GB RAM
-- At least 100 GB Disk space
+- Minimum 8 GB RAM
+- Minimum 100 GB Disk space
+- Minimum 2x 2Ghz CPUs
 - [Docker Compose](https://docs.docker.com/compose/install/ target="_blank")  
 - Access to the Ardoq Docker images on [Docker Hub](http://hub.docker.com) 
   , or zipped on file (contact Ardoq)
 
-The prerequisites may vary according to load.  
+The prerequisites may vary according to load. If your installation will have many concurrent users or store large amounts of data, consider raising the spesifications.
 
 #### Scripts and Environment
 
