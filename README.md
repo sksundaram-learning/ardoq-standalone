@@ -8,7 +8,7 @@ The docker images we use are either official releases, or based on the Alpine Li
 
 ## Prerequisites
 
-- A server, physical or virtual, that supports Docker Machine - [options here](https://docs.docker.com/installation/)  
+- A Linux server, physical or virtual, that supports Docker Machine - [options here](https://docs.docker.com/installation/)  
 - At least 8 GB RAM
 - At least 100 GB Disk space
 - [Docker Compose](https://docs.docker.com/compose/install/ target="_blank")  
