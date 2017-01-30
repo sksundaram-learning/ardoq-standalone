@@ -35,7 +35,7 @@ forwardermongodb:
 redis:
   image: ardoq/ardoq-redis:2.8.21
 mongodb:
-  image: ardoq/mongodb:3.0.7
+  image: ardoq/mongodb:3.4.1
   volumes_from:
     - data
   volumes:
