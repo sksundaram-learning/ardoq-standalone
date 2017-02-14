@@ -57,14 +57,7 @@ function clean {
 }
 
 function load-offline {
-  tar -xf $1
-  for FILE in $(ls ardoq-offline); do
-      if [[ $FILE == *.tar ]]; then
-          echo "Loading ardoq-offline/$FILE"
-          docker load -i ardoq-offline/$FILE
-      fi
-  done
-  rm -rf ardoq-offline
+  docker load -i $1
 }
 
 
