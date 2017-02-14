@@ -54,6 +54,7 @@ api:
   volumes:
     - ./lib:/var/www/ardoqapi/lib
   environment:
+    BASE_URL: ${ARDOQ_BASE_URL}
     MAILSERVER_HOST: ${ARDOQ_MAILSERVER_HOST}
     MAILSERVER_USER: ${ARDOQ_MAILSERVER_USER}
     MAILSERVER_PASS: ${ARDOQ_MAILSERVER_PASS}
