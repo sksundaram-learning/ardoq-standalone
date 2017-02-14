@@ -53,6 +53,11 @@ api:
     - "3000:3000"
   volumes:
     - ./lib:/var/www/ardoqapi/lib
+  environment:
+    MAILSERVER_HOST: ${ARDOQ_MAILSERVER_HOST}
+    MAILSERVER_USER: ${ARDOQ_MAILSERVER_USER}
+    MAILSERVER_PASS: ${ARDOQ_MAILSERVER_PASS}
+    MAILSERVER_SSL: ${ARDOQ_MAILSERVER_SSL}
 
 web:
   image: ardoq/ardoq-front:latest
