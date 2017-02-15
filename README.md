@@ -21,7 +21,15 @@ The prerequisites may vary according to load. If your installation will have man
 #### Scripts and Environment
 
 Along with this installation instruction, you should have received a copy of the docker-compose file _**ardoq\.yml**_ and the startup script **_ardoq.sh._**  
-  
+
+Set up your environment with the following variables to configure base url and email settings:
+
+- ARDOQ_BASE_URL = http://your.server.domain.name
+- ARDOQ_MAILSERVER_HOST = mailserver.host.name
+- ARDOQ_MAILSERVER_USER = mai
+- ARDOQ_MAILSERVER_PASS
+- ARDOQ_MAILSERVER_SSL
+ 
 
 ## Ardoq Docker Images
 
